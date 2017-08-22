@@ -29,6 +29,7 @@ export class AppComponent {
         })
         .subscribe((data) => {this.onKeyUp(data);});
     }
+
     onBlur() {
         this.optionSearchResults = [];
     }
@@ -39,12 +40,16 @@ export class AppComponent {
     }
 
     onSelectSearchResult(option) {
-        console.log("aaaa");
-        this.selectedOption = option;
+        this.selectedOption = option;  
+        this.optionSearchResults= []      
     }
 
     toggle() {
         this.show = !this.show;
+        if (this.optionSearchResults.length > 0) {
+            this.show = false;
+            this.optionSearchResults.length = 0
+        }
     }
 
     onKeyUp(data) {
@@ -52,6 +57,7 @@ export class AppComponent {
         for (let option of this.options) {
             if (option.includes(data)) {
                 results.push(option);
+                this.show = false;
             }
         }
         this.optionSearchResults = results;
@@ -61,6 +67,5 @@ export class AppComponent {
             // nếu option i có chứa data
             // them option i vao lst ketqua
             // show list ketqua
-
 }
 
