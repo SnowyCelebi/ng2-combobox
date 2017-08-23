@@ -1,4 +1,4 @@
-<span contentEditable="false" (blur)="onBlur()" class="sc-combobox-wrapper" style="display:inline-block;">
+<span tabindex="0" (blur)="onBlur()" class="sc-combobox-wrapper" style="display:inline-block;">
     <div class= 'sc-all' >
         <span class= "sc-selected">
             <input [(ngModel)]="selectedOption"  (keyup)="keyUp.next($event)" 
@@ -16,17 +16,6 @@
                 (click)="onSelect(option)"
                 [class.sc-choose]="option === selectedOption" >
                 <span>{{option}}</span>
-            </li>
-        </ul>
-    </div>
-    <div class="sc-deck"
-         *ngIf="optionSearchResults.length > 0">
-        <ul class="sc-search">
-            <li *ngFor="let option of optionSearchResults" 
-                class="sc-option"
-                (click)="onSelectSearchResult(option)"
-                [class.sc-choose]="option === selectedOption" >
-                <span> {{option}} </span>
             </li>
         </ul>
     </div>

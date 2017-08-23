@@ -15,9 +15,9 @@ import 'rxjs/add/operator/delay';
 })
 export class AppComponent {
     title = 'app';
-    options = ['Cotton','Polyester','Cotton/Polyester','Rib Knit'];
+    initialOptions = ['Cotton','Polyester','Cotton/Polyester','Rib Knit'];
+    options = this.initialOptions;
     selectedOption = null;
-    optionSearchResults = [];
     show = false;
     public keyUp = new Subject<string>();
     constructor() {
@@ -31,41 +31,39 @@ export class AppComponent {
     }
 
     onBlur() {
-        this.optionSearchResults = [];
+        this.collapse();
     }
 
     onSelect(option) {
         this.selectedOption = option;
-        this.show = !this.show;
+        this.collapse();
+        this.options = this.initialOptions;
     }
 
-    onSelectSearchResult(option) {
-        this.selectedOption = option;  
-        this.optionSearchResults= []      
+    expand() {
+        this.show = true;
+    }
+
+    collapse() {
+        this.show = false;
     }
 
     toggle() {
         this.show = !this.show;
-        if (this.optionSearchResults.length > 0) {
-            this.show = false;
-            this.optionSearchResults.length = 0
-        }
     }
 
-    onKeyUp(data) {
+    search(data) {
         let results = [];
-        for (let option of this.options) {
+        for (let option of this.initialOptions) {
             if (option.includes(data)) {
                 results.push(option);
-                this.show = false;
+                this.expand();
             }
         }
-        this.optionSearchResults = results;
+        return results;
     }
-            // tạo cái list những option có chứa data:
-            // quét hết các option
-            // nếu option i có chứa data
-            // them option i vao lst ketqua
-            // show list ketqua
+    onKeyUp(data) {
+        this.options = this.search(data);
+    }
 }
 
