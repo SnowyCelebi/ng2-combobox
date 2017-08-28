@@ -57,13 +57,12 @@ export class AppComponent {
         for (let option of this.initialOptions) {
             if (option.includes(data)) {
                 results.push(option);
-                this.expand();
+                this.expand()
             }
-        }
+        }    
         return results;
     }
     onKeyUp(data) {
         this.options = this.search(data);
     }
 }
-
