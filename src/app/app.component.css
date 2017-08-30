@@ -12,6 +12,7 @@
     border-style: solid;
     -webkit-appearance: none;
     background-repeat: repeat;
+    max-width: 15em;
 }
 .sc-selected{
     background-image: none;
@@ -99,10 +100,11 @@
 }
 .sc-deck {
     color: white;
-    width: 14.7em;
+    width: 100%;
     border: 1px solid #efe5e5;
     border-radius: 0 0 3px 3px;
     background: black;
+    
 }
 .sc-option:hover {
     background-color: gray;
