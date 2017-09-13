@@ -7,6 +7,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/delay';
+import { Combobox } from './Combobox/combobox.component';
 
 @Component({
     selector: 'app-root',
@@ -14,55 +15,11 @@ import 'rxjs/add/operator/delay';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    title = 'app';
-    initialOptions = ['Cotton','Polyester','Cotton/Polyester','Rib Knit'];
-    options = this.initialOptions;
-    selectedOption = null;
-    show = false;
-    public keyUp = new Subject<string>();
-    constructor() {
-        const observable = this.keyUp
-        .map(value => (<HTMLInputElement>event.target).value)
-        .debounceTime(500)
-        .mergeMap((search) => {
-            return Observable.of(search).delay(300);
-        })
-        .subscribe((data) => {this.onKeyUp(data);});
+    dataSet = ['Cotton','Polyester','Cotton/Polyester','Rib Knit']; 
+    changeData() {
+        this.dataSet = ['New Data', 'New Data222222222222222222222222222222222222222222222222222222222222222222', 'New Data3', 'New Data4', 'New Data5', 'New Data6', 'New Data7']
     }
-
-    onBlur() {
-        this.collapse();
+    resetData() {
+        this.dataSet = ['Cotton','Polyester','Cotton/Polyester','Rib Knit'];
     }
-
-    onSelect(option) {
-        this.selectedOption = option;
-        this.collapse();
-        this.options = this.initialOptions;
-    }
-
-    expand() {
-        this.show = true;
-    }
-
-    collapse() {
-        this.show = false;
-    }
-
-    toggle() {
-        this.show = !this.show;
-    }
-
-    search(data) {
-        let results = [];
-        for (let option of this.initialOptions) {
-            if (option.includes(data)) {
-                results.push(option);
-                this.expand()
-            }
-        }    
-        return results;
-    }
-    onKeyUp(data) {
-        this.options = this.search(data);
-    }
-}
+} 

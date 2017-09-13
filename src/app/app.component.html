@@ -1,30 +1,15 @@
-<span tabindex="0" (blur)="onBlur()" class="sc-combobox-wrapper" style="display:inline-block;">
-    <div class= 'sc-all' >
-        <span class= "sc-selected">
-            <input [(ngModel)]="selectedOption"  (keyup)="keyUp.next($event)" 
-                placeholder="select Alphabet" class="sc-input"> 
-            <span aria-hidden="true" class="sc-position"(click)="toggle()">  
-                <i class="fa fa-sort-desc" aria-hidden="true"></i> 
-            </span>
-        </span>
-    </div>  
-    <div class="sc-deck"
-         *ngIf="show">
-        <ul class="sc-search">
-            <li *ngFor="let option of options" 
-                class="sc-option"
-                (click)="onSelect(option)"
-                [class.sc-choose]="option === selectedOption" >
-                <span>{{option}}</span>
-            </li>
-        </ul>
+<div>
+    <div>
+        <sm-combobox [initialOptions]="dataSet"></sm-combobox>
     </div>
-</span>
-
-<style>
-.sc-combobox-wrapper:focus {
-    outline:none;
-}
-.sc-combobox-wrapper{max-width: 15em;
-}    
-</style>
+    <div>
+        <form style="margin: 30px">
+            <button type="button" (click)="changeData()">change data</button>
+        </form>
+    </div>
+    <div>
+        <form style="margin: 30px">
+            <button type="button" (click)="resetData()">reset data</button>
+        </form>
+    </div>    
+</div>
